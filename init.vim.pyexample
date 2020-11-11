@@ -1,0 +1,157 @@
+call plug#begin('~/.config/nvim/plugged')
+
+Plug 'preservim/nerdtree'
+Plug 'airblade/vim-rooter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'sheerun/vim-polyglot'
+Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
+Plug 'https://github.com/rking/ag.vim.git'
+Plug 'https://github.com/ycm-core/YouCompleteMe.git'
+Plug 'ervandew/supertab'
+Plug 'mbbill/undotree'
+Plug 'APZelos/blamer.nvim'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'tpope/vim-fugitive'
+" Syntax highlighting
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+" Themes
+Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/edge'
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+call plug#end()
+
+syntax on
+set t_Co=256
+set cursorline
+
+if has('termguicolors')
+  set termguicolors
+endif
+let g:edge_style = 'aura'
+let g:edge_enable_italic = 1
+let g:edge_disable_italic_comment = 1
+colorscheme edge
+let g:airline_theme = 'edge'
+
+" Set of basic vim option
+set noerrorbells
+set tabstop=2 softtabstop=2
+set shiftwidth=2
+set expandtab
+set smartindent
+set nu
+set nowrap
+set smartcase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+set colorcolumn=140
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+set clipboard=unnamedplus
+
+" Update time for vim-gitgutter
+set updatetime=100
+set cursorline
+set nu relativenumber
+
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" Status line
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+set statusline+=%{GitStatus()}
+
+" Let definitions
+let mapleader = " "
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ag_working_path_mode="r"
+
+let g:netrw_browse_split=2
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+let g:ctrlp_use_caching = 0
+
+" Nerdtree
+let NERDTreeMinimalUI = 1
+let g:NERDTreeGitStatusUpdateOnWrite = 0
+let g:NERDTreeGitStatusUpdateOnCursorHold = 0
+let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$']
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+let g:NERDTreeGitStatusPorcelainVersion = 1
+" Close vim of the only window left open is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-f>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-b>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
+
+" Remaps
+map <Leader>h :wincmd h<CR>
+map <Leader>j :wincmd j<CR>
+map <Leader>k :wincmd k<CR>
+map <Leader>l :wincmd l<CR>
+
+vmap <C-y> "+y
+
+" directory/name of file (relative to the current working directory
+nmap ,cs :let @+=expand("%")<CR>
+" full path
+nmap ,cl :let @+=expand("%:p")<CR>
+
+nmap <Leader>f :Ag<SPACE>
+nmap <Leader>g :Git<SPACE>
+nmap <Leader>pf :CtrlP<CR>
+nmap <Leader>t :term<SPACE>
+
+"Remove all trailing whitespace by pressing F5
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+nnoremap <Leader>gd :GoDef<Enter>
+nnoremap <Leader>pt :NERDTreeToggle<Enter>
+nnoremap <silent> <Leader>pv :NERDTreeFind<CR>
+nnoremap <Leader>u :UndotreeShow<CR>
+
+nnoremap <silent> <Leader>vr :vertical resize +30<CR>
+nnoremap <silent> <Leader>r+ :vertical resize +5<CR>
+nnoremap <silent> <Leader>r- :vertical resize -5<CR>
+
+nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>gt :YcmCompleter GetType<CR>
+nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
