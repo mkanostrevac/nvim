@@ -10,7 +10,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'https://github.com/rking/ag.vim.git'
-Plug 'https://github.com/ycm-core/YouCompleteMe.git'
+" Plug 'https://github.com/ycm-core/YouCompleteMe.git'
 Plug 'mbbill/undotree'
 Plug 'APZelos/blamer.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
@@ -148,9 +148,9 @@ nnoremap <silent> <Leader>vr :vertical resize +30<CR>
 nnoremap <silent> <Leader>r+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>r- :vertical resize -5<CR>
 
-nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
-nnoremap <silent> <Leader>gt :YcmCompleter GetType<CR>
-nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
+" nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+" nnoremap <silent> <Leader>gt :YcmCompleter GetType<CR>
+" nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
 
 " TS
 " COC settings
