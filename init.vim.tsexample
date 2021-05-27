@@ -26,6 +26,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " TS
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'preservim/nerdcommenter'
 call plug#end()
 
 syntax on
@@ -95,7 +96,7 @@ let g:ctrlp_use_caching = 0
 let NERDTreeMinimalUI = 1
 let g:NERDTreeGitStatusUpdateOnWrite = 0
 let g:NERDTreeGitStatusUpdateOnCursorHold = 0
-let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$']
+let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$', '^node_modules$']
 let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Modified'  :'✹',
                 \ 'Staged'    :'✚',
@@ -144,7 +145,7 @@ nnoremap <Leader>pt :NERDTreeToggle<Enter>
 nnoremap <silent> <Leader>pv :NERDTreeFind<CR>
 nnoremap <Leader>u :UndotreeShow<CR>
 
-nnoremap <silent> <Leader>vr :vertical resize +30<CR>
+nnoremap <silent> <Leader>vr :vertical resize +15<CR>
 nnoremap <silent> <Leader>r+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>r- :vertical resize -5<CR>
 
@@ -156,6 +157,16 @@ nnoremap <silent> <Leader>r- :vertical resize -5<CR>
 " COC settings
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ ]
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 set encoding=utf-8
 
