@@ -27,6 +27,9 @@ Plug 'honza/vim-snippets'
 " TS
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdcommenter'
+
+" Word motion
+Plug 'chaoren/vim-wordmotion'
 call plug#end()
 
 syntax on
@@ -148,6 +151,9 @@ nnoremap <Leader>u :UndotreeShow<CR>
 nnoremap <silent> <Leader>vr :vertical resize +15<CR>
 nnoremap <silent> <Leader>r+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>r- :vertical resize -5<CR>
+
+" Word motion config
+let g:wordmotion_prefix = '<Leader>'
 
 " nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 " nnoremap <silent> <Leader>gt :YcmCompleter GetType<CR>

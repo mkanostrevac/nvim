@@ -8,5 +8,9 @@
     "javascriptreact",
     "typescript.tsx",
     "graphql"
-  ]
+  ],
+  "python.formatting.provider": "black",
+  //"python.formatting.blackPath": "~/.pyenv/versions/coc/bin/black",
+  //local project directory example
+  "python.formatting.blackPath": "/home/mladen/VivifyIdeas/vndly/venv/bin/black"
 }
