@@ -97,6 +97,7 @@ let g:ctrlp_use_caching = 0
 
 " Nerdtree
 let NERDTreeMinimalUI = 1
+let NERDTreeShowHidden = 1
 let g:NERDTreeGitStatusUpdateOnWrite = 0
 let g:NERDTreeGitStatusUpdateOnCursorHold = 0
 let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$', '^node_modules$']

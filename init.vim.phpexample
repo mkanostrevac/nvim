@@ -103,6 +103,7 @@ let g:ultisnips_php_scalar_types = 1
 
 " Nerdtree
 let NERDTreeMinimalUI = 1
+let NERDTreeShowHidden = 1
 let g:NERDTreeGitStatusUpdateOnWrite = 0
 let g:NERDTreeGitStatusUpdateOnCursorHold = 0
 let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$']
